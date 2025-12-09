@@ -84,15 +84,13 @@
     // Handle scrolling to anchor on page load (for cross-page links)
     window.addEventListener('load', function() {
       if (window.location.hash) {
+        // Prevent browser's default scroll
+        window.scrollTo(0, 0);
         const element = document.querySelector(window.location.hash);
         if (element) {
-          const offset = 80; // header height
-          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-          const offsetPosition = elementPosition - offset;
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
         }
       }
     });
