@@ -80,6 +80,22 @@
         if (button) button.classList.remove('w--open');
       });
     });
+
+    // Handle scrolling to anchor on page load (for cross-page links)
+    window.addEventListener('load', function() {
+      if (window.location.hash) {
+        const element = document.querySelector(window.location.hash);
+        if (element) {
+          const offset = 80; // header height
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - offset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    });
   </script>
   <script>
     if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
@@ -322,6 +338,14 @@ a,
       }
 
       #section-faq {
+        scroll-margin-top: 80px !important;
+      }
+
+      #section-how {
+        scroll-margin-top: 80px !important;
+      }
+
+      #section-why {
         scroll-margin-top: 80px !important;
       }
 
